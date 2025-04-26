@@ -14,6 +14,7 @@ def mhd_eintragen():
     mhd_str = input(" MHD (TT.MM.JJJJ): ").strip()
     batch_str = input(" Batchanzahl: ").strip()
     einheit = input(" Einheit z.B. (Stück, Liter, kg) : ").strip()
+    kommentar = input(" Kommentar : ").strip()
 
     if not product_name:
         print(" Produktname darf nicht leer sein")
@@ -68,7 +69,7 @@ def mhd_eintragen():
             print(" Aktualisierung abgebrochen")
             return
 
-    mhd_db[product_name] = {"mhd":mhd_datum, "batch": batch, "einheit": einheit}
+    mhd_db[product_name] = {"mhd":mhd_datum, "batch": batch, "einheit": einheit, "kommentar": kommentar}
     print(f" MHD für '{product_name}' gespeichert oder aktualisiert: {mhd_datum.strftime('%d.%m.%Y')} (Batch: {batch} {einheit}) ")
 
 
@@ -84,4 +85,7 @@ for name, daten in mhd_db.items():
     print(f"  - Produktname: {name}:")
     print(f"  • MHD:   {daten['mhd'].strftime('%d.%m.%Y')}")
     print(f"  • Batch: {daten['batch']} {daten['einheit']}")
-
+    if daten[' kommentar']:
+        print(f" Kommentar: {daten['kommentar']}")
+    else:
+        print(f" Kommentar: (Kein Kommentar hinterlegt")
